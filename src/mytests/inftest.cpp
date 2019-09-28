@@ -14,7 +14,7 @@ static int nfailed = 0;
         else \
         { \
             std::cerr << #__arg << ": FAILED" << std::endl; \
-			++nfailed;
+            ++nfailed; \
         }
 
 
@@ -39,15 +39,15 @@ int main(int argc, char* argv[])
     TEST1((-epicsINF) + epicsINF != 0.0);
     TEST1(epicsINF + (-epicsINF) != epicsINF);
     TEST1((-epicsINF) + epicsINF != epicsINF);
-	
-	if (nfailed == 0)
-	{
-		std::cerr << "OK: All tests passed" << std::endl;
+    
+    if (nfailed == 0)
+    {
+        std::cerr << "OK: All tests passed" << std::endl;
         return 0;
-	}
-	else
-	{
-		std::cerr << "ERROR: " << nfailed << " tests failed" << std::endl;
-		return -1;
-	}
+    }
+    else
+    {
+        std::cerr << "ERROR: " << nfailed << " tests failed" << std::endl;
+        return -1;
+    }
 }
