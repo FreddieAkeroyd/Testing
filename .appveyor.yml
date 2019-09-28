@@ -15,6 +15,7 @@ init:
   # Set autocrlf to make batch files work
   - git config --global core.autocrlf true
 
+
 # Set clone depth (do not fetch complete history)
 clone_depth: 50
 
@@ -40,17 +41,17 @@ configuration:
 # Environment variables: compiler toolchain
 environment:
   matrix:
-  - TOOLCHAIN: 10.0
-  - TOOLCHAIN: 11.0
-  - TOOLCHAIN: 12.0
-  - TOOLCHAIN: 14.0
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    TOOLCHAIN: 2017
+#  - TOOLCHAIN: 10.0
+#  - TOOLCHAIN: 11.0
+#  - TOOLCHAIN: 12.0
+#  - TOOLCHAIN: 14.0
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+#    TOOLCHAIN: 2017
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     TOOLCHAIN: 2019
-  - TOOLCHAIN: cygwin
-  - TOOLCHAIN: mingw
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+#  - TOOLCHAIN: cygwin
+#  - TOOLCHAIN: mingw
+#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
 # Platform: architecture
 platform:
@@ -83,6 +84,10 @@ build_script:
 
 test_script:
   - cmd: .ci/appveyor-make.bat runtests
+
+on_failure:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 #---------------------------------#
 #         notifications           #
