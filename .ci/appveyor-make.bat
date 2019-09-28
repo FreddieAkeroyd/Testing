@@ -8,7 +8,10 @@
 
 Setlocal EnableDelayedExpansion
 
+:: we do not currently have combined static and debug targets
+:: this tagret is handled via CONFIG_SITE in appveyor-prepare 
 set "ST="
+if /i "%CONFIGURATION%"=="debug" set ST=-debug
 if /i "%CONFIGURATION%"=="static" set ST=-static
 
 set OS=64BIT
