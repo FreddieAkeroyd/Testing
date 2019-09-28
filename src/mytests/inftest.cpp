@@ -4,6 +4,8 @@
 //static float epicsNAN = std::numeric_limits<float>::quiet_NaN();
 static float epicsINF = std::numeric_limits<float>::infinity();
 
+static int nfailed = 0;
+
 #define TEST1(__arg) \
     if ( ( __arg ) == 1 ) \
         { \
@@ -12,6 +14,7 @@ static float epicsINF = std::numeric_limits<float>::infinity();
         else \
         { \
             std::cerr << #__arg << ": FAILED" << std::endl; \
+			++nfailed;
         }
 
 
@@ -36,7 +39,15 @@ int main(int argc, char* argv[])
     TEST1((-epicsINF) + epicsINF != 0.0);
     TEST1(epicsINF + (-epicsINF) != epicsINF);
     TEST1((-epicsINF) + epicsINF != epicsINF);
-
-    return 0;
+	
+	if (nfailed == 0)
+	{
+		std::cerr << "OK: All tests passed" << std::endl;
+        return 0;
+	}
+	else
+	{
+		std::cerr << "ERROR: " << nfailed << " tests failed" << std::endl;
+		return -1;
+	}
 }
-
