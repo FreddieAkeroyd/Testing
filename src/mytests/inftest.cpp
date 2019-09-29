@@ -1,5 +1,5 @@
 #pragma optimize("", off)
-#pragma float_control(strict, on)
+//#pragma float_control(strict, on)
 
 
 #include <limits>
