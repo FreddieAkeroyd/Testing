@@ -1,3 +1,7 @@
+#pragma optimize("", off)
+#pragma float_control(precise, on)
+
+
 #include <limits>
 #include <iostream>
 
@@ -5,6 +9,7 @@
 static float epicsINF = std::numeric_limits<float>::infinity();
 
 static int nfailed = 0;
+
 
 #define TEST1(__arg) \
     if ( ( __arg ) == 1 ) \
